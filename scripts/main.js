@@ -12,7 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const categoriesUrl = 'https://api.chucknorris.io/jokes/categories';
     get(categoriesUrl).then(function (response) {
         console.log(response);
-        makeCategoryList(response);
+        const valueToRemove = 'explicit';
+        const filteredCategories = response.filter(item => item != valueToRemove);
+        makeCategoryList(filteredCategories);
     })
 
     categoryListFormEl.addEventListener('submit', function (event) {
