@@ -4,4 +4,20 @@
 
 html {
     background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 65ch;
+}
+
+button, select {
+    width: 150px;
 }
