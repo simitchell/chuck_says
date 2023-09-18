@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuck Says</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
     <link rel="stylesheet" href="./styles/style.css" />
 </head>
 
 <body>
-    <main class="wrapper">
+    <main class="wrapper container">
         <h1>Chuck Says!</h1>
         <p id="chuckQuote">Quote will go here</p>
-        <form id="categoryListForm">
-            <button type="submit">Select a category</button>
+        <form id="categoryListForm" class="form">
+            <button class="button is-primary" type="submit">Click for quote from category</button>
         </form>
     </main>
     <script src="./scripts/get.js"></script>

@@ -2,31 +2,38 @@
 
 const categoryListFormEl = document.querySelector('#categoryListForm');
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
     console.log("DOM IS READY");
 
     const chuckQuote = document.querySelector('#chuckQuote');
 
     const apiUrl = 'https://api.chucknorris.io/jokes/random?category=dev';
 
+    const responseJoke = await getWithAwait(apiUrl);
+        showQuote(responseJoke.value, chuckQuote);
+
     const categoriesUrl = 'https://api.chucknorris.io/jokes/categories';
-    get(categoriesUrl).then(function (response) {
-        console.log(response);
-        const valueToRemove = 'explicit';
-        const filteredCategories = response.filter(item => item != valueToRemove);
-        makeCategoryList(filteredCategories);
-    })
+    getWithAwait(categoriesUrl)
+        .then(function (response) {
+            // console.log(response);
+            const valueToRemove = 'explicit';
+            const filteredCategories = response.filter(item => item != valueToRemove);
+            makeCategoryList(filteredCategories);
+        })
+
+    const response = await getWithAwait(categoriesUrl);
+    makeCategoryList(response);
 
     categoryListFormEl.addEventListener('submit', function (event) {
         event.preventDefault();
         const newCategory = this.querySelector('select').value;
         const apiUrl = `https://api.chucknorris.io/jokes/random?category=${newCategory}`;
         generateQuote(apiUrl);
-});
+    });
 
-    function generateQuote(apiUrl) {
+    async function generateQuote(apiUrl) {
         get(apiUrl).then(function (response) {
-            console.log('Response: ', response);
+            // console.log('Response: ', response);
             showQuote(response.value, chuckQuote);
         });
     }
@@ -36,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function makeCategoryList(categoryArray) {
-        console.log(categoryArray);
+        // console.log(categoryArray);
         const selectEl = document.createElement('select');
         categoryArray.map(function (category) {
             // create an option element
@@ -52,4 +59,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// this returns an array makeCategoryList(categoryArray).  16 items.  Our mission is to write a .filter onto this array in order to take out unwanted categories, such as explicit.  Start by removing one category, then move on from there.
+// this returns an array makeCategoryList(categoryArray).  16 items.  Our mission is to write a .filter onto this array in order to take out unwanted categories, such as explicit.  Start by removing one category, then move on from there.  * Mission completed 09.15.23
